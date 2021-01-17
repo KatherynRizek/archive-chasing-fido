@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+
+  ui:
+    container_name: ui
+    build: ui
+    volumes:
+      - ./ui:/app
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+
+  api:
+    container_name: api
+    build: api
+    volumes:
+      - ./api:/app
+      - gradle_cache:/root/.gradle
+    ports:
+      - 8080:8080
+    depends_on: 
+      - database
+
+  database:
+    container_name: postgres
+    image: postgres
+    ports: 
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: memery
+
+volumes:
+  gradle_cache:
