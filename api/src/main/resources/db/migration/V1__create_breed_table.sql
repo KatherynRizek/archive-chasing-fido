@@ -1,0 +1,4 @@
+CREATE TABLE breeds (
+    id SERIAL NOT NULL PRIMARY KEY,
+    type TEXT
+);
